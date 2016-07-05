@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+	<http auto-config="true" >
+		<intercept-url pattern="/myapp/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/app/user/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/myapp/login" access="permitAll()" />
+		<form-login 
+		    login-page="/myapp/login" 
+		    default-target-url="/myapp/listBeers" 
+			authentication-failure-url="/myapp/login?error" 
+			username-parameter="username"
+			password-parameter="password" />
+		<logout logout-success-url="/myapp/login?logout" />	
+	</http>
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref='userDetailsService'/>
+	</authentication-manager>
+</beans:beans>

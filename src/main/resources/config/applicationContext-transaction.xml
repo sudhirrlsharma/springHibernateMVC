@@ -10,8 +10,9 @@
 	    <tx:annotation-driven transaction-manager="transactionManager" /> 
 	
 	 <!--configuration of datasource transaction manager -->  
-	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 	     <property name="dataSource" ref="dataSource"/>
+	      <property name="sessionFactory" ref="sessionFactory"/>
 	</bean> 
 
  </beans>
