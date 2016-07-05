@@ -19,7 +19,7 @@
 
 	<servlet-mapping>
 		<servlet-name>XMLBasedSpringSecurity</servlet-name>
-		<url-pattern>/myapp/*</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>jsp</servlet-name>

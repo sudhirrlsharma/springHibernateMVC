@@ -362,10 +362,10 @@
 					<scanTargets>
 						<scanTarget>src/main/java</scanTarget>
 					</scanTargets>
-					<jvmArgs>
+<!-- 					<jvmArgs>
 						-javaagent:C:\Users\sudhirsh\.m2\repository\org\jacoco\org.jacoco.agent\0.7.2.201409121644\org.jacoco.agent-0.7.2.201409121644-runtime.jar=destfile=E:\training\trainingWorkSpace\springHibernateMVC\target\coverage-reports\jacoco-it.exec,append=true,includes=cybage.**
 					</jvmArgs>
-					<webApp>
+ -->					<webApp>
 						<contextPath>/</contextPath>
 					</webApp>
 				</configuration>

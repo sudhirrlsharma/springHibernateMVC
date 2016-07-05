@@ -2,6 +2,7 @@ package cybage.dao;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,11 +23,9 @@ public class BeerDaoImpl extends BaseDao implements BeerDao{
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackFor = {RuntimeException.class})
+	@PreAuthorize("hasRole('ROLE_USER_WRITE')")
 	public void saveBeer(Beer object) {
 		this.hibernateTamplate.saveOrUpdate(object);
-//		if(true){
-//			throw new RuntimeException("Transaction should rollback");
-//		}
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)

@@ -29,6 +29,7 @@ INSERT INTO users(username,password,enabled) VALUES ('sudhir','sharma', true);
 INSERT INTO users(username,password,enabled) VALUES ('cybage','gandhinagar', true);
 
 
-INSERT INTO user_roles (username, role) VALUES ('sudhir', 'ROLE_USER');
 INSERT INTO user_roles (username, role) VALUES ('sudhir', 'ROLE_ADMIN');
+INSERT INTO user_roles (username, role) VALUES ('cybage', 'ROLE_ADMIN');
 INSERT INTO user_roles (username, role) VALUES ('cybage', 'ROLE_USER');
+INSERT INTO user_roles (username, role) VALUES ('cybage', 'ROLE_USER_WRITE');

@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -71,6 +72,7 @@ public class BeerFormController {
 		binder.setValidator(this.validator);
 	}
 
+	
 	@RequestMapping(method = RequestMethod.POST)
 	protected String saveBeer(@ModelAttribute("beer") @Valid DomesticBeer beer, Errors errors) throws Exception {
 		
@@ -78,6 +80,6 @@ public class BeerFormController {
 			return "editBeer";
 		}
 		this.beerDao.saveBeer(beer);
-		return "redirect:/myapp/listBeers";
+		return "redirect:/listBeers";
 	}
 }
