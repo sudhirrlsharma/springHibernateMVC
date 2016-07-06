@@ -24,7 +24,18 @@ CREATE TABLE `users`(
   CONSTRAINT fk_username FOREIGN KEY (`username`) REFERENCES users (`username`)
  )ENGINE=InnoDB DEFAULT CHARSET=latin1;
  
- 
+
+CREATE TABLE IF NOT EXISTS `user_permission` (
+  `user_permission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `permission` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_permission_id`),
+  UNIQUE KEY uni_username_permission (`permission`,`username`),
+  KEY fk_username_perm_idx (`username`),
+  CONSTRAINT fk_username_per FOREIGN KEY (`username`) REFERENCES users (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 INSERT INTO users(username,password,enabled) VALUES ('sudhir','sharma', true);
 INSERT INTO users(username,password,enabled) VALUES ('cybage','gandhinagar', true);
 
@@ -32,4 +43,8 @@ INSERT INTO users(username,password,enabled) VALUES ('cybage','gandhinagar', tru
 INSERT INTO user_roles (username, role) VALUES ('sudhir', 'ROLE_ADMIN');
 INSERT INTO user_roles (username, role) VALUES ('cybage', 'ROLE_ADMIN');
 INSERT INTO user_roles (username, role) VALUES ('cybage', 'ROLE_USER');
-INSERT INTO user_roles (username, role) VALUES ('cybage', 'ROLE_USER_WRITE');
+
+
+INSERT INTO user_permission (username, permission) VALUES ('cybage', 'BEER_CREATE');
+INSERT INTO user_permission (username, permission) VALUES ('cybage', 'BEER_DELETE');
+

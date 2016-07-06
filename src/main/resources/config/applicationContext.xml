@@ -58,6 +58,7 @@ http://www.springframework.org/schema/util/spring-util-3.0.xsd" >
           	<value>cybage.spring.model.DomesticBeer</value>
           	<value>cybage.spring.model.User</value>
           	<value>cybage.spring.model.UserRole</value>
+          	<value>cybage.spring.model.UserPermission</value>
           </list>
          </property>
 <!--         <property name="hibernateProperties">
@@ -67,7 +68,7 @@ http://www.springframework.org/schema/util/spring-util-3.0.xsd" >
             </value>
         </property>
  -->    </bean>
+ 
 	<context:property-placeholder location="classpath:jdbc.properties" />
-
-
+	
 </beans>

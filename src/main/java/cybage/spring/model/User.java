@@ -2,6 +2,7 @@ package cybage.spring.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,7 @@ public class User {
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+	private Set<UserPermission> userPermission = new HashSet<UserPermission>(0);
 
 	public User() {
 	}
@@ -64,11 +66,21 @@ public class User {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<UserPermission> getUserPermission() {
+		return this.userPermission;
+	}
+	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<UserRole> getUserRole() {
 		return this.userRole;
 	}
 
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
+	}
+	
+	public void setUserPermission(Set<UserPermission> userPermission) {
+		this.userPermission = userPermission;
 	}
 }

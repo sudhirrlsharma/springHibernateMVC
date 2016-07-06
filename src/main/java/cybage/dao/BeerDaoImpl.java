@@ -23,9 +23,9 @@ public class BeerDaoImpl extends BaseDao implements BeerDao{
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackFor = {RuntimeException.class})
-	@PreAuthorize("hasRole('ROLE_USER_WRITE')")
-	public void saveBeer(Beer object) {
-		this.hibernateTamplate.saveOrUpdate(object);
+	@PreAuthorize("hasPermission(#user, 'BEER_CREATE')")
+	public void saveBeer(Beer beer) {
+		this.hibernateTamplate.saveOrUpdate(beer);
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
