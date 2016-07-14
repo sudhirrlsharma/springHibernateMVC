@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+	<sec:http auto-config="true">
+	
+	<!-- All the permit rule shoudl be at the top so that access rule can be ignore 
+	 -->
+		<sec:intercept-url pattern="/login" access="permitAll"/>
+      	<sec:intercept-url pattern="/signup" access="permitAll"/>
+      	<sec:intercept-url pattern="/about" access="permitAll"/>
+      	<sec:intercept-url pattern="/**" access="isAuthenticated()" />
+      	
+		<sec:form-login 
+		    login-page="/login" 
+		    default-target-url="/listBeers" 
+		    login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/login?error" 
+			username-parameter="username"
+			always-use-default-target="true"  
+			password-parameter="password" />
+		<sec:logout logout-success-url="/login?logout" />
+	</sec:http>
+	<sec:authentication-manager alias="authenticationManager">
+		<!-- <sec:authentication-provider ref="ldapAuthProvider"/> -->
+		<sec:ldap-authentication-provider user-dn-pattern="uid={0},ou=user,ou=ActiveMQ,ou=system"/>
+	</sec:authentication-manager>
+	
+	
+	 <sec:ldap-server id="contextSource" url="ldap://localhost:10389/" manager-dn="uid=admin,ou=system" manager-password="secret"/>	
+	
+	
+	<!--  Enable this for method security 
+	  <sec:global-method-security pre-post-annotations="enabled">
+	  	  <sec:expression-handler ref="expressionHandler"/>
+	 </sec:global-method-security>
+	  
+	 
+	 <bean id="expressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+		<property name="permissionEvaluator" ref="customPermissionEvaluator"/>
+	</bean>
+	
+	<bean id="customPermissionEvaluator" class="cybage.spring.security.CustomPermissionEvaluator" />
+-->
+	
+	<!-- 
+	<bean id="ldapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+ 		<constructor-arg>
+   			<bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+   			  	<constructor-arg ref="contextSource"/>
+     			<property name="userDnPatterns">
+       				<list><value>uid={0},ou=user,ou=ActiveMQ,ou=system</value></list>
+     			</property>
+   			</bean>
+ 		</constructor-arg>
+ 	</bean>
+
+	
+	<bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+  		<constructor-arg value="ldap://localhost:10389/"/>
+  		<property name="userDn" value="uid=admin,ou=system"/>
+  		<property name="password" value="secret"/>
+	</bean>
+	
+ -->
+<!--
+ http://www.intertech.com/Blog/spring-security-active-directory-ldap-example/
+ -->
+</beans>

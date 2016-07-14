@@ -40,6 +40,7 @@
 			classpath:config/applicationContext.xml,
 			classpath:config/applicationContext-AOP-aspectj.xml,
 			classpath:config/applicationContext-transaction.xml,
+			<!-- classpath:config/applicationContext-security-ldap.xml -->
 			classpath:config/applicationContext-security.xml
 		</param-value>
 	</context-param>

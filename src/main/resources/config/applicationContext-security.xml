@@ -26,7 +26,7 @@ http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 		<logout logout-success-url="/login?logout" />
 	</http>
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref='userDetailsService'/>
+		<authentication-provider user-service-ref="userDetailsService"/>
 	</authentication-manager>
 	
 	<!--  Enable this for method security -->
